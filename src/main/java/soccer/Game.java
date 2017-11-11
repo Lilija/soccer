@@ -3,6 +3,7 @@ package soccer;
 import util.GameUtils;
 import util.ProjectSettings;
 
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 public class Game {
@@ -17,6 +18,7 @@ public class Game {
     private LocalDateTime theDateTime;
     private int homeTeamGoals = 0;
     private int awayTeamGoals = 0;
+    @ManyToOne private League theLeague;
 
     public LocalDateTime getTheDateTime() {
         return theDateTime;

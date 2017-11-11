@@ -4,12 +4,20 @@ import util.CrTeamsException;
 import util.PlayerDatabase;
 import util.ProjectSettings;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 
 public class League {
-
+    @Id@GeneratedValue(strategy = GenerationType.AUTO)
+private int id;
+@Temporal(TemporalType.DATE)
 private LocalDate fromDate;
+@OneToMany(mappedBy = "theLeague")
+private Game[] gamesArrey;
+
+
+@Temporal(TemporalType.DATE)
 private LocalDate toDate;
 
 public void getBestTeams (Team[] teams) {
