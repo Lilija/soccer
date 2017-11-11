@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,11 +19,12 @@ import java.time.LocalDate;
         private LeagueRepository leagueRepository;
 
         @GetMapping(path="/add") // Map ONLY GET Requests
-        public @ResponseBody String
-        addNewLeague () {
+        public String
+        addNewLeague (Model model) {
             League league = new League(LocalDate.now(), LocalDate.now().plusDays(50));
             leagueRepository.save(league);
-            return league.getAnounsment();
+            model.addAttribute("leagueAnounsment", league.getAnounsment());
+            return "league";
         }
 
         @GetMapping(path="/all")
