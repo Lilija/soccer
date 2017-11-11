@@ -1,4 +1,4 @@
-package util;
+package soccer.util;
 
 import java.time.format.DateTimeFormatter;
 

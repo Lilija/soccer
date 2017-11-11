@@ -1,4 +1,4 @@
-package util;
+package soccer.util;
 
 public class CrTeamsException extends Exception {
     public CrTeamsException (){}

@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package util;
+package soccer.util;
 
 
-import soccer.Player;
-import soccer.Team;
+import soccer.enteties.Player;
+import soccer.enteties.Team;
 
 import java.util.ArrayList;
 

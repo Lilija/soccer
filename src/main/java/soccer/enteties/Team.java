@@ -1,4 +1,4 @@
-package soccer;
+package soccer.enteties;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -7,7 +7,9 @@ public class Team implements  Comparable{
     @Id@GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String teamName;
-    @OneToMany(mappedBy = "playerTeam") private Player[] playerArray;
+    @OneToMany(mappedBy = "playerTeam")
+    @Transient
+    private Player[] playerArray;
 
     public int getNumOfPoints() {
         return Arrays.stream(this.playerArray).mapToInt(Player::getNumOfPoints).sum();

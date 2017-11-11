@@ -1,4 +1,4 @@
-package soccer;
+package soccer.enteties;
 
 public abstract class GameEvent {
     private Team theTeam;

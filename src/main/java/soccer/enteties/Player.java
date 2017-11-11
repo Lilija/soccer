@@ -1,18 +1,12 @@
-package soccer;
+package soccer.enteties;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
-import org.springframework.data.annotation.Id;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Player{
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String playerName;
     @ManyToOne
     private Team playerTeam;
@@ -21,8 +15,9 @@ public class Player{
 public int getNumOfPoints() {
     return this.numOfPoints;
     }
+public Player(){}
+    public Player( String playerName) {
 
-    public Player(String playerName) {
         this.playerName = playerName;
     }
 
@@ -55,7 +50,7 @@ public int getNumOfPoints() {
         this.playerTeam = playerTeam;
     }
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 }

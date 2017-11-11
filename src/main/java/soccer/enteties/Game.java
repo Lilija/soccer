@@ -1,24 +1,27 @@
-package soccer;
+package soccer.enteties;
 
-import util.GameUtils;
-import util.ProjectSettings;
 
-import javax.persistence.ManyToOne;
+import soccer.util.*;
+import javax.persistence.*;
 import java.time.LocalDateTime;
-
+@Entity
 public class Game {
-    public int getId() {
-        return id;
-    }
-
+    @Id@GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @OneToOne
     private Team homeTeam;
+    @OneToOne
     private Team awayTeam;
+    @Transient
     private GameEvent[] gameEvents;
     private LocalDateTime theDateTime;
     private int homeTeamGoals = 0;
     private int awayTeamGoals = 0;
     @ManyToOne private League theLeague;
+
+    public int getId() {
+        return id;
+    }
 
     public LocalDateTime getTheDateTime() {
         return theDateTime;
@@ -45,6 +48,7 @@ public class Game {
     }
 
     //Constructor
+    public Game(){}
     public Game(Team pHomeTeam, Team pAwayTeam) {
         this.homeTeam = pHomeTeam;
         this.awayTeam = pAwayTeam;
