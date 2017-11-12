@@ -1,5 +1,7 @@
 package soccer.enteties;
 
+import jdk.nashorn.internal.objects.annotations.Constructor;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,32 +14,12 @@ public class Player{
     private Team playerTeam;
     private int numOfPoints;
 
-public int getNumOfPoints() {
-    return this.numOfPoints;
+    public long getId() {
+        return id;
     }
-public Player(){}
-    public Player( String playerName) {
-
-        this.playerName = playerName;
-    }
-
-    public void incPlayerNumOfPoints (int numOfPoints){
-        this.numOfPoints +=numOfPoints;
-    }
-
-    public void setTeam(Team playerTeam) {
-        this.playerTeam = playerTeam;
-    }
-
-    public Team getPlayerTeam() {
-        return playerTeam;
-    }
-
-    @Override
-    public String toString() {
-        return this.playerName +", points "+ this.numOfPoints;
-    }
-
+    public int getNumOfPoints() {
+        return this.numOfPoints;
+        }
     public String getPlayerName() {
         return playerName;
     }
@@ -46,11 +28,32 @@ public Player(){}
         this.playerName = playerName;
     }
 
+    public Team getPlayerTeam() {
+        return playerTeam;
+    }
+
     public void setPlayerTeam(Team playerTeam) {
         this.playerTeam = playerTeam;
     }
 
-        public long getId() {
-            return id;
-        }
+    @Override
+    public String toString() {
+        return this.playerName +", points "+ this.numOfPoints;
+    }
+
+    public void incPlayerNumOfPoints (int numOfPoints){
+        this.numOfPoints +=numOfPoints;
+    }
+
+    //Constructors
+    Player(){}//for JPA
+
+    public Player( String playerName) {
+        this.playerName = playerName;
+        this.numOfPoints = 0;
+    }
+    public Player(String playerName, Team team){
+        this(playerName);
+        this.playerTeam = team;
+    }
 }

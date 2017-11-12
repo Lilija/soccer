@@ -1,4 +1,4 @@
-package soccer;
+package soccer.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import soccer.Application;
+import soccer.enteties.LeagueRepository;
 import soccer.enteties.League;
 import java.time.LocalDate;
 

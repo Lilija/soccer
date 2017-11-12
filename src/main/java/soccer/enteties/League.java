@@ -7,6 +7,8 @@ import soccer.util.ProjectSettings;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
+
+
 @Entity
 public class League {
 @Id@GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,7 +18,6 @@ private LocalDate toDate;
 @OneToMany(mappedBy = "theLeague")
 @Transient
 private Game[] gamesArrey;
-
 
 
 public void getBestTeams (Team[] teams) {
@@ -46,16 +47,9 @@ public void getBestTeams (Team[] teams) {
 
     }
 */
-    public Optional<Player> getBestPlayer (Team[] teams) {
-        List<Player> thePlayers = new ArrayList();
-        for (Team item:teams) {
-            thePlayers.addAll(Arrays.asList(item.getPlayerArray()));
 
-        }
-       return thePlayers.stream().max(Comparator.comparingInt(Player::getNumOfPoints));
+ League() {}
 
-    }
-public League() {}
     public League(LocalDate fromDate, LocalDate toDate){
     this.fromDate = fromDate;
     this.toDate = toDate;
