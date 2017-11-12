@@ -17,5 +17,5 @@ public interface LeagueRepository extends CrudRepository<League, Integer>,
                                             LeagueRepositoryCustom<League, Integer>{
     Optional<Team> findBestTeamById (int Id);
     Optional<Player> findBestPlayerByID (int Id);
-    Optional<League> findByID(int Id);
+    Optional<League> findOne(int Id);
 }
