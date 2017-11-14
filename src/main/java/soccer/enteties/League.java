@@ -15,48 +15,41 @@ public class League {
 private int id;
 private LocalDate fromDate;
 private LocalDate toDate;
-@OneToMany(mappedBy = "theLeague")
-@Transient
-private Game[] gamesArrey;
+    @OneToMany(mappedBy = "theLeague")
+    @Transient
+    private Game[] gamesArrey;
 
+    @OneToMany(mappedBy = "playerLeague")
+    @Transient
+    private Player[] leaguePlayers;
 
-public void getBestTeams (Team[] teams) {
-    Arrays.sort(teams);
-    for (Team item:teams) {
-        System.out.println(item);
+    public String getTitle() {
+        return title;
     }
 
-}
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    private String title;
+
+
     public Optional<Team> getBestTeam (Team[] teams) {
         return Arrays.stream(teams).max(Comparator.comparing(Team::getNumOfPoints));
     }
 
-/*
-    public void getBestPlayers (Team[] teams) {
-        List<Player> thePlayers = new ArrayList();
-        for (Team item:teams) {
-            thePlayers.addAll(Arrays.asList(item.getPlayerArray()));
 
-        }
-        Collections.sort(thePlayers,
-                (p1,p2)->Double.valueOf(p2.getNumOfPoints()).compareTo(Double.valueOf(p1.getNumOfPoints())));
-
-        for (Player item: thePlayers) {
-            System.out.println(item.toString());
-        }
-
-    }
-*/
 
  League() {}
 
-    public League(LocalDate fromDate, LocalDate toDate){
+    public League(String title, LocalDate fromDate, LocalDate toDate){
+     this.title = title;
     this.fromDate = fromDate;
     this.toDate = toDate;
 }
 
 public String  getAnounsment() {
-    return ("Leage will be played from "+
+    return ("League "+ this.getTitle()+" will be played from "+
                         this.fromDate.format(ProjectSettings.SoccerFormater)+
                         " to "+ this.toDate.format(ProjectSettings.SoccerFormater));
 }
@@ -80,7 +73,7 @@ public String  getAnounsment() {
         for (Team homeTeam: teams){
             for (Team awayTeam:teams){
                 if (homeTeam!=awayTeam){
-                    games.add(new Game(homeTeam, awayTeam));
+                    games.add(new Game(homeTeam, awayTeam, this));
                 }
             }
         }

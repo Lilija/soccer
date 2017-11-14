@@ -11,12 +11,17 @@ import soccer.enteties.Player;
 import soccer.enteties.Team;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
  * @author Administrator
  */
 public class PlayerDatabase {
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
 
     private ArrayList<Player> players;
 
@@ -29,20 +34,22 @@ public class PlayerDatabase {
         }
     }
 
-    public Team getTeam(String name, int numOfPlayers) throws CrTeamsException{
-        Player[] teamPlayers = new Player[numOfPlayers];
+    public Team getTeam(String name, int numOfPlayers ) throws CrTeamsException{
+      Player[] teamPlayers = new Player[numOfPlayers];
+      Team team = new  Team(name, teamPlayers);
 try {
     for (int i = 0; i < numOfPlayers; i++) {
         int ind = (int) Math.random() * numOfPlayers;
-
+        this.players.get(ind).setPlayerTeam(team);
         teamPlayers[i] = this.players.get(ind);
         this.players.remove(ind);
     }
+
 }
 catch (IndexOutOfBoundsException ie){
     throw new CrTeamsException("Not enought players");
 }
-        return new Team(name, teamPlayers);
+        return team;
     }
 
 

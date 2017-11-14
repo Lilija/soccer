@@ -17,7 +17,8 @@ public class Game {
     private LocalDateTime theDateTime;
     private int homeTeamGoals = 0;
     private int awayTeamGoals = 0;
-    @ManyToOne private League theLeague;
+    @ManyToOne
+    private League theLeague;
 
     public int getId() {
         return id;
@@ -49,9 +50,10 @@ public class Game {
 
     //Constructor
     public Game(){}
-    public Game(Team pHomeTeam, Team pAwayTeam) {
+    public Game(Team pHomeTeam, Team pAwayTeam, League league) {
         this.homeTeam = pHomeTeam;
         this.awayTeam = pAwayTeam;
+        this.theLeague = league;
         this.setHomeTeamGoals(0);
         this.setAwayTeamGoals(0);
         this.setTheDateTime(LocalDateTime.now());

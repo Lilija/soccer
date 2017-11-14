@@ -5,27 +5,35 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import soccer.Application;
-import soccer.enteties.LeagueRepository;
+import soccer.repositories.LeagueRepository;
 import soccer.enteties.League;
 import java.time.LocalDate;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
-    @Controller
+@Controller
     @EntityScan(basePackageClasses = {Application.class, Jsr310JpaConverters.class})
     @RequestMapping(path="/league")
  public class LeagueController {
         @Autowired
         private LeagueRepository leagueRepository;
 
-        @GetMapping(path="/add") // Map ONLY GET Requests
-        public String
-        addNewLeague (Model model) {
-            League league = new League(LocalDate.now(), LocalDate.now().plusDays(50));
-            leagueRepository.save(league);
-            model.addAttribute("leagueAnounsment", league.getAnounsment());
+        @GetMapping(path="/{title}")
+        public Optional<League>
+        getLeague (@PathVariable String title) {
+
+            return this.leagueRepository.findByTitle(title);
+        }
+
+        @PostMapping(path="/add")
+        String add(@RequestBody League input, Model model) {
+            AtomicInteger counter = new AtomicInteger(0);
+            input = new League("Test League " + counter.incrementAndGet(), LocalDate.now().plusDays(counter.get()), LocalDate.now().plusDays(counter.get()+50));
+            leagueRepository.save(input);
+            model.addAttribute("leagueAnounsment", input.getAnounsment());
             return "league";
         }
 

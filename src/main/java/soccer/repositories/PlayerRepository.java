@@ -1,4 +1,4 @@
-package soccer.enteties;
+package soccer.repositories;
 
 import javafx.print.Collation;
 
@@ -10,5 +10,5 @@ import java.util.Collection;
 
 @Repository
 public interface PlayerRepository extends CrudRepository<Player, Integer> {
-   Collection<Player> findByTeamId(int teamId);
+   Collection<Player> findByPlayerTeam(int teamId);
 }

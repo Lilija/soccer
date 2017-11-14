@@ -12,6 +12,9 @@ public class Player{
     private String playerName;
     @ManyToOne
     private Team playerTeam;
+
+    @ManyToOne
+    private League playerLeague;
     private int numOfPoints;
 
     public long getId() {
@@ -39,6 +42,13 @@ public class Player{
     @Override
     public String toString() {
         return this.playerName +", points "+ this.numOfPoints;
+    }
+    public League getPlayerLeague() {
+        return playerLeague;
+    }
+
+    public void setPlayerLeague(League playerLeague) {
+        this.playerLeague = playerLeague;
     }
 
     public void incPlayerNumOfPoints (int numOfPoints){
